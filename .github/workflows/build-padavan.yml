@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MR2600
+        TNAME: XB1200G
       run: |
         cd /opt/rt-n56u/trunk
         #改 LAN IP 信息
