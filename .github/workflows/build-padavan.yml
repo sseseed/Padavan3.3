@@ -34,13 +34,13 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         #git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
-        cp -r /opt/XB1200G/* /opt/rt-n56u
+        #cp -r /opt/XB1200G/* /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: JCG-836PRO
+        TNAME: JCG-Y2
       run: |
         cd /opt/rt-n56u/trunk
         #改 LAN IP 信息
