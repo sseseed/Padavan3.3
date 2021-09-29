@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: JCG-Y2
+        TNAME: JCG-Q20
       run: |
         cd /opt/rt-n56u/trunk
         #改 LAN IP 信息
