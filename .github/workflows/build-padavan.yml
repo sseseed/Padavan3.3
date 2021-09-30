@@ -39,10 +39,10 @@ jobs:
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.mk /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/XB1200G
         
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/K2P/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
                 
         cp /opt/rt-n56u/trunk/configs/templates/MSG1500.config /opt/rt-n56u/trunk/configs/templates/XB1200G.config
         
