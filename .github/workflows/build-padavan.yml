@@ -33,8 +33,9 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
-        git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
-        cp -r /opt/XB1200G/* /opt/rt-n56u
+        mkdir /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/* /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56utrunk/configs/templates/K2P.config /opt/rt-n56utrunk/configs/templates/XB1200G.config
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
@@ -43,6 +44,21 @@ jobs:
         TNAME: XB1200G
       run: |
         cd /opt/rt-n56u/trunk
+        
+        #改写K2P的配置文件
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/PHICOMM K2P Wireless Router/XB1200G Wireless Router/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/PHICOMM/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/www.phicomm.com/www.mediatek.cn/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/#undef BOARD_GPIO_BTN_RESET/#define BOARD_GPIO_BTN_RESET	18/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/#define BOARD_GPIO_BTN_WPS	3/#undef BOARD_GPIO_BTN_WPS	/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/#define  BOARD_GPIO_LED_WIFI	14/#undef  BOARD_GPIO_LED_WIFI	/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/#define  BOARD_GPIO_LED_POWER	13/#define BOARD_GPIO_LED_POWER	3/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/#define BOARD_GPIO_LED_WAN	15/#undef  BOARD_GPIO_LED_WAN/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
+        cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
+        exit 1
         #改 LAN IP 信息
         sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
         sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
@@ -51,6 +67,8 @@ jobs:
         sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
         
         #改自定义插件
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
+        sed -i 's/CONFIG_FIRMWARE_CPU_900MHZ=y/CONFIG_FIRMWARE_CPU_520MHZ=y/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_ENABLE_IPV6=y/CONFIG_FIRMWARE_ENABLE_IPV6=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_UVC=y/CONFIG_FIRMWARE_INCLUDE_UVC=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SERIAL=y/CONFIG_FIRMWARE_INCLUDE_SERIAL=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
