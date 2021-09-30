@@ -35,7 +35,7 @@ jobs:
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         mkdir /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp -r /opt/rt-n56u/trunk/configs/boards/K2P/* /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56utrunk/configs/templates/K2P.config /opt/rt-n56utrunk/configs/templates/XB1200G.config
+        cp /opt/rt-n56u/trunk/configs/templates/K2P.config /opt/rt-n56u/trunk/configs/templates/XB1200G.config
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
