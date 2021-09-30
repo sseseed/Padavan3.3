@@ -58,8 +58,7 @@ jobs:
         cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
         sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
-        cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
-        exit 1
+
         #改 LAN IP 信息
         sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
         sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
