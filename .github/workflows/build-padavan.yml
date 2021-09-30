@@ -36,14 +36,26 @@ jobs:
         mkdir /opt/rt-n56u/trunk/configs/boards/XB1200G
         #cp -r /opt/rt-n56u/trunk/configs/boards/MSG1500/* /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.h /opt/rt-n56u/trunk/configs/boards/XB1200G
+        sed -i 's/define BOARD_NUM_ANT_5G_TX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        sed -i 's/define BOARD_NUM_ANT_5G_RX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        sed -i 's/define BOARD_NUM_ANT_2G_TX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        sed -i 's/define BOARD_NUM_ANT_2G_RX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        echo "#define BOARD_NUM_ANT_2G_TX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        echo "#define BOARD_NUM_ANT_2G_RX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        echo "#define BOARD_NUM_ANT_5G_TX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        echo "#define BOARD_NUM_ANT_5G_RX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.mk /opt/rt-n56u/trunk/configs/boards/XB1200G
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.mk
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.mk
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/XB1200G
         
         cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/K2P/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-                
+        sed -i 's#INDEX0_profile_path=/etc/Wireless/iNIC/iNIC_ap.dat;/etc/Wireless/RT2860/RT2860AP.dat#INDEX0_profile_path=/etc/Wireless/RT2860/RT2860AP.dat;/etc/Wireless/iNIC/iNIC_ap.dat#' /opt/rt-n56u/trunk/configs/boards/$TNAME/l1profile.dat
+        
         cp /opt/rt-n56u/trunk/configs/templates/MSG1500.config /opt/rt-n56u/trunk/configs/templates/XB1200G.config
         
         ls /opt/rt-n56u/trunk/configs/boards/MSG1500
