@@ -1,4 +1,4 @@
-#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
+#修改TNAME: MSG1500-5.0 中的MSG1500-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build Padavan
 
 on: 
@@ -39,14 +39,14 @@ jobs:
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.mk /opt/rt-n56u/trunk/configs/boards/XB1200G
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/XB1200G
         
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
                 
         cp /opt/rt-n56u/trunk/configs/templates/MSG1500.config /opt/rt-n56u/trunk/configs/templates/XB1200G.config
         
-        ls /opt/rt-n56u/trunk/configs/boards/K2P
+        ls /opt/rt-n56u/trunk/configs/boards/MSG1500
         ls /opt/rt-n56u/trunk/configs/templates/
         
         
@@ -59,9 +59,9 @@ jobs:
       run: |
         cd /opt/rt-n56u/trunk
         
-        #改写K2P的配置文件
-        #sed -i 's/PHICOMM K2P Wireless Router/XB1200G Wireless Router/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        #改写MSG1500的配置文件
+        #sed -i 's/PHICOMM MSG1500 Wireless Router/XB1200G Wireless Router/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         #sed -i 's/PHICOMM/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         #sed -i 's/www.phicomm.com/www.mediatek.cn/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         #sed -i 's/#undef BOARD_GPIO_BTN_RESET/#define BOARD_GPIO_BTN_RESET	18/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
@@ -70,8 +70,8 @@ jobs:
         #sed -i 's/#define  BOARD_GPIO_LED_POWER	13/#define BOARD_GPIO_LED_POWER	3/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         #sed -i 's/#define BOARD_GPIO_LED_WAN	15/#undef  BOARD_GPIO_LED_WAN/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         #cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
-        #sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
+        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
+        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
 
         #改 LAN IP 信息
         sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
@@ -81,7 +81,7 @@ jobs:
         sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
         
         #改自定义插件
-        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
+        sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
 
         sed -i 's/CONFIG_FIRMWARE_WIFI2_DRIVER=4.1//' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         
