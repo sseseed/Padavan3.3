@@ -48,7 +48,7 @@ jobs:
         
         ls /opt/rt-n56u/trunk/configs/boards/K2P
         ls /opt/rt-n56u/trunk/configs/templates/
-        exit 1
+        
         
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
