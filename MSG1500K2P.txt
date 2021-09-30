@@ -1,0 +1,80 @@
+name: Build Padavan
+
+on: 
+  release:
+    types: [published]
+  push:
+    tags:
+    - 'v*'
+  #  branches: 
+  #    - master
+#  schedule:
+#    - cron: 0 8 * * 5
+  watch:
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+    - name: Clone source code
+      run: |
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
+        cp -r /opt/XB1200G/* /opt/rt-n56u      
+        
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir -p /opt/images/
+    - name: Build Firmware
+      env:
+        TNAME: XB1200G
+      run: |
+        cd /opt/rt-n56u/trunk
+        
+        #改 LAN IP 信息
+        sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/192.168.2.244/192.168.1.200/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        #改恢复出厂设置后跳转的新地址
+        sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
+        
+        #显示 VPN 服务器和客户端菜单
+        sed -i 's/menuL1_title = new Array("", "<#menu1#>", "", "", ""/menuL1_title = new Array("", "<#menu1#>", "", "<#menu2#>", "<#menu6#>"/' /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/state.js
+        sed -i 's/menuL1_link = new Array("", "index.asp", "", "", ""/menuL1_link = new Array("", "index.asp", "", "vpnsrv.asp", "vpncli.asp"/' /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/state.js
+        
+        #修改语言包的默认 IP 说明
+        sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/www/dict/CN.dict
+
+        #改版本后缀
+        echo "FIRMWARE_ROOTFS_VER=3.9" > /opt/rt-n56u/trunk/versions.inc
+        echo "FIRMWARE_BUILDS_VER=099-"$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
+        echo "FIRMWARE_BUILDS_REV="$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
+        
+        if [ ! -f configs/templates/$TNAME.config ] ; then
+        echo "configs/templates/$TNAME.config not found "
+        exit 1
+        fi
+        cp -f configs/templates/$TNAME.config .config
+        
+        sudo ./clear_tree
+        sudo ./build_firmware_modify $TNAME 0
+        sudo mv -f images/*.trx /opt/images/
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
