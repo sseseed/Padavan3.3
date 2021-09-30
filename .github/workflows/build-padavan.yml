@@ -34,9 +34,8 @@ jobs:
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
         cp -r /opt/XB1200G/* /opt/rt-n56u
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.h /opt/rt-n56u/trunk/configs/boards/XB1200G
                 
-        ls /opt/rt-n56u/trunk/configs/boards/MSG1500 #####
+        ls /opt/rt-n56u/trunk/configs/boards/XB1200G #####
         ls /opt/rt-n56u/trunk/configs/templates/ #####
         
         
