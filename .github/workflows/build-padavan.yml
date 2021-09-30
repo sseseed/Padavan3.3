@@ -46,8 +46,8 @@ jobs:
         cd /opt/rt-n56u/trunk
         
         #改写K2P的配置文件
-        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/PHICOMM K2P Wireless Router/XB1200G Wireless Router/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/PHICOMM/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/www.phicomm.com/www.mediatek.cn/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/#undef BOARD_GPIO_BTN_RESET/#define BOARD_GPIO_BTN_RESET	18/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
@@ -56,6 +56,7 @@ jobs:
         sed -i 's/#define  BOARD_GPIO_LED_POWER	13/#define BOARD_GPIO_LED_POWER	3/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         sed -i 's/#define BOARD_GPIO_LED_WAN	15/#undef  BOARD_GPIO_LED_WAN/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
         cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
         sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
         cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
         exit 1
