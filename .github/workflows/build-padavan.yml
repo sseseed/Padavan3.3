@@ -1,4 +1,3 @@
-#修改TNAME: MSG1500-5.0 中的MSG1500-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build Padavan
 
 on: 
@@ -33,33 +32,12 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
-        mkdir /opt/rt-n56u/trunk/configs/boards/XB1200G
-        #cp -r /opt/rt-n56u/trunk/configs/boards/MSG1500/* /opt/rt-n56u/trunk/configs/boards/XB1200G
+        git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
+        cp -r /opt/XB1200G/* /opt/rt-n56u
         cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.h /opt/rt-n56u/trunk/configs/boards/XB1200G
-        sed -i 's/define BOARD_NUM_ANT_5G_TX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        sed -i 's/define BOARD_NUM_ANT_5G_RX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        sed -i 's/define BOARD_NUM_ANT_2G_TX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        sed -i 's/define BOARD_NUM_ANT_2G_RX	2//' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        echo "#define BOARD_NUM_ANT_2G_TX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        echo "#define BOARD_NUM_ANT_2G_RX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        echo "#define BOARD_NUM_ANT_5G_TX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        echo "#define BOARD_NUM_ANT_5G_RX	2" >>/opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
-        
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/board.mk /opt/rt-n56u/trunk/configs/boards/XB1200G
-        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.mk
-        sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.mk
-        cp /opt/rt-n56u/trunk/configs/boards/MSG1500/kernel-3.4.x.config /opt/rt-n56u/trunk/configs/boards/XB1200G
-        
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku-bf.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU_mt7615e-sku.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config /opt/rt-n56u/trunk/configs/boards/XB1200G
-        cp /opt/rt-n56u/trunk/configs/boards/K2P/l1profile.dat /opt/rt-n56u/trunk/configs/boards/XB1200G
-        sed -i 's#INDEX0_profile_path=/etc/Wireless/iNIC/iNIC_ap.dat;/etc/Wireless/RT2860/RT2860AP.dat#INDEX0_profile_path=/etc/Wireless/RT2860/RT2860AP.dat;/etc/Wireless/iNIC/iNIC_ap.dat#' /opt/rt-n56u/trunk/configs/boards/XB1200G/l1profile.dat
-        
-        cp /opt/rt-n56u/trunk/configs/templates/MSG1500.config /opt/rt-n56u/trunk/configs/templates/XB1200G.config
-        
-        ls /opt/rt-n56u/trunk/configs/boards/MSG1500
-        ls /opt/rt-n56u/trunk/configs/templates/
+                
+        ls /opt/rt-n56u/trunk/configs/boards/MSG1500 #####
+        ls /opt/rt-n56u/trunk/configs/templates/ #####
         
         
         cd /opt/rt-n56u/toolchain-mipsel
@@ -71,20 +49,6 @@ jobs:
       run: |
         cd /opt/rt-n56u/trunk
         
-        #改写MSG1500的配置文件
-        #sed -i 's/PHICOMM MSG1500 Wireless Router/XB1200G Wireless Router/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/PHICOMM/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/www.phicomm.com/www.mediatek.cn/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/#undef BOARD_GPIO_BTN_RESET/#define BOARD_GPIO_BTN_RESET	18/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/#define BOARD_GPIO_BTN_WPS	3/#undef BOARD_GPIO_BTN_WPS	/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/#define  BOARD_GPIO_LED_WIFI	14/#undef  BOARD_GPIO_LED_WIFI	/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/#define  BOARD_GPIO_LED_POWER	13/#define BOARD_GPIO_LED_POWER	3/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/#define BOARD_GPIO_LED_WAN	15/#undef  BOARD_GPIO_LED_WAN/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #cat /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
-        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
-        #sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
-
         #改 LAN IP 信息
         sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
         sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
@@ -93,11 +57,6 @@ jobs:
         sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
         
         #改自定义插件
-        sed -i 's/MSG1500/XB1200G/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
-
-        sed -i 's/CONFIG_FIRMWARE_WIFI2_DRIVER=4.1//' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
-        
-        sed -i 's/CONFIG_FIRMWARE_WIFI5_DRIVER=3.0/CONFIG_FIRMWARE_WIFI_DRIVER=5.0.5.1\r\nCONFIG_FIRMWARE_KERNEL_CONFIG="kernel-3.4.x-5.0.config"/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         
         sed -i 's/CONFIG_FIRMWARE_CPU_900MHZ=y/CONFIG_FIRMWARE_CPU_520MHZ=y/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_ENABLE_IPV6=y/CONFIG_FIRMWARE_ENABLE_IPV6=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
