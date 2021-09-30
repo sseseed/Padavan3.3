@@ -78,14 +78,14 @@ jobs:
         
         #改自定义插件
         sed -i 's/K2P/XB1200G/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
-        
+        exit 1
         sed -i 's/### Kernel driver select for WiFi AP 2.4GHz/#/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/### 4.1 = MT7603E v4.1.0.0/#/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_WIFI2_DRIVER=4.1/#/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/### Kernel driver select for WiFi AP 5GHz/### Kernel driver select for WiFi AP 2.4GHz/5GHz/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/### 3.0 = MT7612E v3.0.4.0/CONFIG_FIRMWARE_WIFI_DRIVER=5.0.5.1/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_WIFI5_DRIVER=3.0/CONFIG_FIRMWARE_KERNEL_CONFIG="kernel-3.4.x-5.0.config"/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
-        
+        exit 1
         sed -i 's/CONFIG_FIRMWARE_CPU_900MHZ=y/CONFIG_FIRMWARE_CPU_520MHZ=y/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_ENABLE_IPV6=y/CONFIG_FIRMWARE_ENABLE_IPV6=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_UVC=y/CONFIG_FIRMWARE_INCLUDE_UVC=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
