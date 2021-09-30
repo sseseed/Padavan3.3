@@ -77,7 +77,8 @@ jobs:
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_DOGCOM=y/CONFIG_FIRMWARE_INCLUDE_DOGCOM=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_MINIEAP=y/CONFIG_FIRMWARE_INCLUDE_MINIEAP=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=y/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n/' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
-        
+        cat /opt/rt-n56u/trunk/configs/templates/$TNAME.config
+        exit 1
         #sed -i 's///' /opt/rt-n56u/trunk/configs/templates/$TNAME.config
         
         #显示 VPN 服务器和客户端菜单
