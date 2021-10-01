@@ -34,6 +34,13 @@ jobs:
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
         cp -r /opt/XB1200G/* /opt/rt-n56u
+        #替换掉文件中的 ^M
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.h
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/XB1200G/board.mk
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/XB1200G/kernel-3.4.x-5.0.config
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/XB1200G/kernel-3.4.x.config
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/XB1200G/l1profile.dat
+        
         cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/XB1200G
         
         cd /opt/rt-n56u/toolchain-mipsel
