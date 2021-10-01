@@ -33,7 +33,9 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
-        cp -r /opt/XB1200G/* /opt/rt-n56u      
+        cp -r /opt/XB1200G/* /opt/rt-n56u
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/XB1200G
+        ls /opt/rt-n56u/trunk/configs/boards/XB1200G
         
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
