@@ -2,7 +2,7 @@
 
 #define BOARD_PID		"XB1200G"
 #define BOARD_NAME		"XB1200G"
-#define BOARD_DESC		"XB1200G"
+#define BOARD_DESC		"XB1200G Wireless Router"
 #define BOARD_VENDOR_NAME	"XB1200G"
 #define BOARD_VENDOR_URL	"http://www.mediatek.cn"
 #define BOARD_MODEL_URL		"http://www.mediatek.cn"
@@ -15,9 +15,9 @@
 #undef  BOARD_GPIO_LED_WIFI
 #undef  BOARD_GPIO_LED_SW2G
 #undef  BOARD_GPIO_LED_SW5G
-#define BOARD_GPIO_LED_POWER	3
+#undef  BOARD_GPIO_LED_POWER
 #undef  BOARD_GPIO_LED_LAN
-#undef  BOARD_GPIO_LED_WAN
+#define BOARD_GPIO_LED_WAN	3
 #undef  BOARD_GPIO_LED_USB
 #undef  BOARD_GPIO_LED_ROUTER
 #undef  BOARD_GPIO_PWR_USB
