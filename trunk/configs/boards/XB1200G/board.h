@@ -6,8 +6,8 @@
 #define BOARD_VENDOR_NAME	"XB1200G"
 #define BOARD_VENDOR_URL	"http://www.mediatek.cn"
 #define BOARD_MODEL_URL		"http://www.mediatek.cn"
-#define BOARD_BOOT_TIME		50
-#define BOARD_FLASH_TIME	120
+#define BOARD_BOOT_TIME		60
+#define BOARD_FLASH_TIME	180
 #undef BOARD_GPIO_BTN_FN1
 #define BOARD_GPIO_BTN_RESET	18
 #undef  BOARD_GPIO_BTN_WPS
