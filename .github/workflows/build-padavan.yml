@@ -42,7 +42,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: XB1200G(7621-7615)GE-AP
+        TNAME: XB764(7628-7612)FE-AP
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
