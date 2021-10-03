@@ -7,7 +7,7 @@
 #define BOARD_VENDOR_URL	"https://www.mediatek.cn/"
 #define BOARD_MODEL_URL		"https://www.mediatek.cn/"
 #define BOARD_BOOT_TIME		60
-#define BOARD_FLASH_TIME    180
+#define BOARD_FLASH_TIME      180
 #define BOARD_GPIO_BTN_RESET	38
 #undef  BOARD_GPIO_BTN_FN1
 #undef  BOARD_GPIO_BTN_WPS
