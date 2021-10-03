@@ -1,9 +1,9 @@
 /* FE-AP */
 
-#define BOARD_PID		"FE-AP"
-#define BOARD_NAME		"FE-AP"
-#define BOARD_DESC		"FE-AP Wireless Router"
-#define BOARD_VENDOR_NAME	"FE-AP"
+#define BOARD_PID		"XB764"
+#define BOARD_NAME		"XB764"
+#define BOARD_DESC		"XB764 Wireless Router"
+#define BOARD_VENDOR_NAME	"XB764"
 #define BOARD_VENDOR_URL	"https://www.mediatek.cn/"
 #define BOARD_MODEL_URL		"https://www.mediatek.cn/"
 #define BOARD_BOOT_TIME		60
