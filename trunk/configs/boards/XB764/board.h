@@ -1,4 +1,4 @@
-/* FE-AP */
+/* XB764 */
 
 #define BOARD_PID		"XB764"
 #define BOARD_NAME		"XB764"
