@@ -44,7 +44,7 @@ jobs:
       env:
         # 千兆 XB1200G MT621+MT7615 8M+128M 2.4G 300M + 5.8G 866M
         # 百兆 XB764   MT628+MT7612 8M+64M  2.4G 300M + 5.8G 866M
-        TNAME: XB1200G
+        TNAME: XB764
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
