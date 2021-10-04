@@ -43,8 +43,8 @@ jobs:
     - name: Build Firmware
       env:
         # GE-AP：XB1200G MT621+MT7615 8M+128M 2.4G 300M + 5.8G 866M
-        # FE-AP： XB764   MT628+MT7612 8M+64M  2.4G 300M + 5.8G 866M
-        TNAME: GE-AP
+        # FE-AP：XB764   MT628+MT7612 8M+64M  2.4G 300M + 5.8G 866M
+        TNAME: FE-AP
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
