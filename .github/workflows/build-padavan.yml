@@ -35,7 +35,7 @@ jobs:
         git clone --depth=1 https://github.com/sseseed/86-AP.git /opt/86-AP
         cp -r /opt/86-AP/* /opt/rt-n56u
         
-        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/XB1200G
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/GE-AP
         
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
