@@ -1,9 +1,9 @@
-/* XB1200G */
+/* GE-AP */
 
-#define BOARD_PID		"XB1200G"
-#define BOARD_NAME		"XB1200G"
-#define BOARD_DESC		"XB1200G Wireless Router"
-#define BOARD_VENDOR_NAME	"XB1200G"
+#define BOARD_PID		"GE-AP"
+#define BOARD_NAME		"GE-AP"
+#define BOARD_DESC		"GE-AP Wireless Router"
+#define BOARD_VENDOR_NAME	"GE-AP"
 #define BOARD_VENDOR_URL	"http://www.mediatek.cn"
 #define BOARD_MODEL_URL		"http://www.mediatek.cn"
 #define BOARD_BOOT_TIME		60
