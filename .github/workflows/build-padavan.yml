@@ -45,7 +45,7 @@ jobs:
         # GE-AP：XB1200G MT621+MT7615 8M+128M 2.4G:300M + 5.8G:866M
         # FE-AP：XB764   MT628+MT7612 8M+64M  2.4G:300M + 5.8G:866M
         # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
-        TNAME: MSG1500
+        TNAME: GE-AP
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
