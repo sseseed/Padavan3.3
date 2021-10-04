@@ -32,8 +32,8 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
-        git clone --depth=1 https://github.com/sseseed/XB1200G.git /opt/XB1200G
-        cp -r /opt/XB1200G/* /opt/rt-n56u
+        git clone --depth=1 https://github.com/sseseed/86-AP.git /opt/86-AP
+        cp -r /opt/86-AP/* /opt/rt-n56u
         
         cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/XB1200G
         
