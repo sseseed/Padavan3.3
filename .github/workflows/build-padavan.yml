@@ -1,4 +1,4 @@
-name: GE-AP
+name: Build Padavan
 on: 
   release:
     types: [published]
