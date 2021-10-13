@@ -60,8 +60,6 @@ jobs:
         sed -i 's/mips_cpu_feq = 575 \* 1000 \* 1000/mips_cpu_feq = 575 \* 1000 \* 1000 \* 0.1/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         sed -i 's/mips_cpu_feq = 580 \* 1000 \* 1000/mips_cpu_feq = 580 \* 1000 \* 1000 \* 0.1/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         sed -i 's/mips_cpu_feq = (480\*1000\*1000)/mips_cpu_feq = (480\*1000\*1000) \* 0.1/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
-        cat /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
-        exit 1
         
         #改 LAN IP 信息
         sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
