@@ -61,6 +61,10 @@ jobs:
         sed -i 's/mips_cpu_feq = 580 \* 1000 \* 1000/mips_cpu_feq = 540 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         sed -i 's/mips_cpu_feq = (480\*1000\*1000)/mips_cpu_feq = (480\*1000\*1000)/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         sed -i 's/surfboard_sysclk = mips_cpu_feq\/3/surfboard_sysclk = 100000000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        sed -i '0,/set CPU ratio for sleep mode/s/set CPU ratio for sleep mode/set CPU ratio for sleep mode ./' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        sed -i 's/set CPU ratio for sleep mode (USB OCP must be >= 30MHz) \*\//set CPU ratio for sleep mode (USB OCP must be >= 30MHz)/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        sed -i 's/RALINK_SYSCTL_BASE + 0x38))) = reg;/RALINK_SYSCTL_BASE + 0x38))) = reg; \*\//' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        
         cat /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         
         #改 LAN IP 信息
