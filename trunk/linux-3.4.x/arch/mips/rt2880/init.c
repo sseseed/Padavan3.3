@@ -567,7 +567,7 @@ static void prom_init_sysclk(void)
 #elif defined (CONFIG_RALINK_MT7628)
 	case 0:
 		if (xtal == 25)
-			mips_cpu_feq = 575 * 1000 * 1000;	/* 25MHZ Xtal */
+			mips_cpu_feq = 230 * 1000 * 1000;	/* 25MHZ Xtal */
 		else
 			mips_cpu_feq = 580 * 1000 * 1000;	/* 40MHz Xtal */
 		break;
@@ -666,7 +666,8 @@ static void prom_init_sysclk(void)
 		ocp_freq = mips_cpu_feq/3;	/* OCP_RATIO 1:3 */
 	surfboard_sysclk = mips_cpu_feq/4;
 #elif defined (CONFIG_RALINK_MT7628)
-	surfboard_sysclk = mips_cpu_feq/3;
+/*	surfboard_sysclk = mips_cpu_feq/3; */
+	surfboard_sysclk=180;
 	if (clk_sel2)
 		ram_type = "DDR1";
 	else
