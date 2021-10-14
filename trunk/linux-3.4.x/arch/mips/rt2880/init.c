@@ -671,6 +671,22 @@ static void prom_init_sysclk(void)
 		ram_type = "DDR1";
 	else
 		ram_type = "DDR2";
+	/* set CPU ratio for sleep mode (USB OCP must be >= 30MHz) */
+	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440)));
+	reg &= ~0x0f0f;
+	reg |=  0x0606;	/* CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
+	(*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440))) = reg;
+	udelay(10);
+
+	/* disable request preemption */
+	reg = (*((volatile u32 *)(RALINK_RBUS_MATRIXCTL_BASE + 0x0)));
+	reg &= ~0x04000000;
+	(*((volatile u32 *)(RALINK_RBUS_MATRIXCTL_BASE + 0x0))) = reg;
+
+	/* MIPS reset apply to Andes */
+	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x38)));
+	reg |= 0x200;
+	(*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x38))) = reg;
 #else
 	surfboard_sysclk = mips_cpu_feq/3;
 #endif
