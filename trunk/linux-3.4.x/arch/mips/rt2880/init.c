@@ -666,8 +666,7 @@ static void prom_init_sysclk(void)
 		ocp_freq = mips_cpu_feq/3;	/* OCP_RATIO 1:3 */
 	surfboard_sysclk = mips_cpu_feq/4;
 #elif defined (CONFIG_RALINK_MT7628)
-/*	surfboard_sysclk = mips_cpu_feq/3; */
-	surfboard_sysclk=180;
+	surfboard_sysclk = mips_cpu_feq/3; 
 	if (clk_sel2)
 		ram_type = "DDR1";
 	else
@@ -675,7 +674,7 @@ static void prom_init_sysclk(void)
 	/* set CPU ratio for sleep mode (USB OCP must be >= 30MHz) */
 	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440)));
 	reg &= ~0x0f0f;
-	reg |=  0x0606;	/* CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
+	reg |=  0x0202;	/* CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
 	(*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440))) = reg;
 	udelay(10);
 
