@@ -673,11 +673,8 @@ static void prom_init_sysclk(void)
 		ram_type = "DDR2";
 	/* set CPU ratio for sleep mode (USB OCP must be >= 30MHz) */
 	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440)));
-        printk("CPU ratio: %d\n",reg);
 	reg &= ~0x0f0f;
-	printk("CPU ratio: %d\n",reg);
-	/*reg |=  0x0606;	 CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
-	printk("CPU ratio: %d\n",reg);
+	reg |=  0x0606;	 /*CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
 	(*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440))) = reg;
 	udelay(10);
 
