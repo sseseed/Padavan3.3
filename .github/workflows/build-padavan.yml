@@ -58,10 +58,9 @@ jobs:
         
         #改 MT7628 频率
         
-        #sed -i 's/mips_cpu_feq = 575 \* 1000 \* 1000/mips_cpu_feq = 345 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
-        #sed -i 's/mips_cpu_feq = 580 \* 1000 \* 1000/mips_cpu_feq = 345 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
-        #sed -i 's/mips_cpu_feq = (480\*1000\*1000)/mips_cpu_feq = (480\*1000\*1000)/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
-        #sed -i 's/surfboard_sysclk = mips_cpu_feq\/3/surfboard_sysclk = 100000000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        sed -i 's/mips_cpu_feq = 575 \* 1000 \* 1000/mips_cpu_feq = 230 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+
+        sed -i 's/surfboard_sysclk = mips_cpu_feq\/3/surfboard_sysclk = 180000000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         
         cat /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         
