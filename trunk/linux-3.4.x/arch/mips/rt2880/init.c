@@ -567,7 +567,7 @@ static void prom_init_sysclk(void)
 #elif defined (CONFIG_RALINK_MT7628)
 	case 0:
 		if (xtal == 25)
-			mips_cpu_feq = 230 * 1000 * 1000;	/* 25MHZ Xtal */
+			mips_cpu_feq = 575 * 1000 * 1000;	/* 25MHZ Xtal */
 		else
 			mips_cpu_feq = 580 * 1000 * 1000;	/* 40MHz Xtal */
 		break;
@@ -673,8 +673,11 @@ static void prom_init_sysclk(void)
 		ram_type = "DDR2";
 	/* set CPU ratio for sleep mode (USB OCP must be >= 30MHz) */
 	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440)));
+        printk("CPU ratio: %d\n",reg);
 	reg &= ~0x0f0f;
+	printk("CPU ratio: %d\n",reg);
 	reg |=  0x0202;	/* CPU ratio 1/6 for sleep mode (OCP: 575/6/3 = 31 MHz) */
+	printk("CPU ratio: %d\n",reg);
 	(*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x440))) = reg;
 	udelay(10);
 
