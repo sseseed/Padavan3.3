@@ -79,6 +79,16 @@ jobs:
         #修改 5.8G 自动限制弱信号设备接入:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
+        #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
+        sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr1", "208.67.222.222" }/{ "di_addr1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr2", "14.17.42.40" }/{ "di_addr2", "114.114.114.114" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr3", "8.8.8.8" }/{ "di_addr3", "114.114.115.115" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr4", "8.8.4.4" }/{ "di_addr4", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr5", "208.67.220.220" }/{ "di_addr5", "119.29.29.29" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_port2", "80" }/{ "di_port2", "53" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c
+        return 0
         
         #改恢复出厂设置后跳转的新地址
         sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
