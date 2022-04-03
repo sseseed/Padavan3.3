@@ -1,4 +1,4 @@
-name: FE-AP
+name: GL-FE-AP
 on: 
   release:
     types: [published]
@@ -47,7 +47,7 @@ jobs:
         # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
         # YK-L1：MT7620 32M+128M 2.4G:300M
         # GL-FE-AP：MT7628 8M+64M 2.4G:300M
-        TNAME: FE-AP
+        TNAME: GL-FE-AP
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
