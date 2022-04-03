@@ -1,4 +1,4 @@
-name: YK-L1
+name: GL-FE-AP
 on: 
   release:
     types: [published]
@@ -42,11 +42,12 @@ jobs:
     - name: Build Firmware
       env:
         # 编译名称 实际型号 具体硬件配置
-        # GE-AP：XB1200G MT621+MT7615 8M+128M 2.4G:300M + 5.8G:866M
-        # FE-AP：XB764   MT628+MT7612 8M+64M  2.4G:300M + 5.8G:866M
+        # GE-AP：XB1200G MT7621+MT7615 8M+128M 2.4G:300M + 5.8G:866M
+        # FE-AP：XB764   MT7628+MT7612 8M+64M  2.4G:300M + 5.8G:866M
         # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
         # YK-L1：MT7620 32M+128M 2.4G:300M
-        TNAME: YK-L1
+        # GL-FE-AP:MT7628 8M+64M 2.4G:300M
+        TNAME: GL-FE-AP
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
