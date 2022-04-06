@@ -79,16 +79,15 @@ jobs:
         sed -i 's/{ "wl_KickStaRssiLow", "0" }/{ "wl_KickStaRssiLow", "-90" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         #修改 5.8G 自动限制弱信号设备接入:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-        [! $TNAME != "GL-FE-AP" ] ; then
-          sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "lan_dns2", "" }/{ "lan_dns1", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          cat /opt/rt-n56u/trunk/user/shared/defaults.c
-          exit 1
-        fi
+        
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "lan_dns2", "" }/{ "lan_dns1", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  cat /opt/rt-n56u/trunk/user/shared/defaults.c
+        test $TNAME -eq "GL-FE-AP" &&  exit 1
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
         sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
