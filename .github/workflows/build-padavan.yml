@@ -91,8 +91,8 @@ jobs:
         
         #如果设备是 GL-FE-AP ，则改为 AP 模式
         if ["$TNAME" = "$APGL"]  then
-          sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
