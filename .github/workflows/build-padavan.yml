@@ -86,6 +86,8 @@ jobs:
           sed -i 's/{ "lan_dns2", "" }/{ "lan_dns1", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          cat /opt/rt-n56u/trunk/user/shared/defaults.c
+          return 1
         fi
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
