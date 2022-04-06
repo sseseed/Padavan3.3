@@ -50,7 +50,7 @@ jobs:
         TNAME: "GL-FE-AP"
         
         #AP 类设备请在下面定义变量名，方便自动设置为 AP 模式
-        AP-GL-FE-AP: "GL-FE-AP"
+        APGL: "GL-FE-AP"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
@@ -90,11 +90,12 @@ jobs:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #如果设备是 GL-FE-AP ，则改为 AP 模式
-        test ${TNAME} -eq ${AP-GL-FE-AP} &&  sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c || echo no
-        test ${TNAME} -eq ${AP-GL-FE-AP} &&  sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c || echo no
-        test ${TNAME} -eq ${AP-GL-FE-AP} &&  cat /opt/rt-n56u/trunk/user/shared/defaults.c  || echo no
-        test ${TNAME} -eq ${AP-GL-FE-AP} &&  exit 1  || echo no
-        
+        if [ "$TNAME" = "$APGL" ];then
+          sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          cat /opt/rt-n56u/trunk/user/shared/defaults.c
+          exit 1
+        fi
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
         sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "di_addr1", "208.67.222.222" }/{ "di_addr1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
