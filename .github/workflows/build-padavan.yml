@@ -119,7 +119,7 @@ jobs:
         echo "FIRMWARE_BUILDS_VER=099-"$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
         echo "FIRMWARE_BUILDS_REV="$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
         
-        [ ! -f configs/templates/$TNAME.config ] ; then
+        if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
         fi
