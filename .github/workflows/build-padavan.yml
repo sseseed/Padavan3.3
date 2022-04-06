@@ -79,7 +79,7 @@ jobs:
         sed -i 's/{ "wl_KickStaRssiLow", "0" }/{ "wl_KickStaRssiLow", "-90" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         #修改 5.8G 自动限制弱信号设备接入:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-        if (TNAME = "GL-FE-AP") then
+        if ($TNAME == "GL-FE-AP") then
           sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
