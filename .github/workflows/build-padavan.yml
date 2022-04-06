@@ -47,7 +47,7 @@ jobs:
         # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
         # YK-L1：MT7620 32M+128M 2.4G:300M
         # GL-FE-AP：MT7628 8M+64M 2.4G:300M
-        TNAME: "GE-AP"
+        TNAME: "GL-FE-AP"
         
         #AP 类设备请在下面定义变量名，方便自动设置为 AP 模式
         APGL: "GL-FE-AP"
