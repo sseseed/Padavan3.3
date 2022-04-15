@@ -47,8 +47,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: $name
-        #TNAME: "GL-FE-AP"
+        TNAME: "GL-FE-AP"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
