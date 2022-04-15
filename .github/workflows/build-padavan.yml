@@ -76,7 +76,7 @@ jobs:
         sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-        sed -i 's/{ "lan_dns2", "" }/{ "lan_dns1", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "lan_dns2", "" }/{ "lan_dns2", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #修改 2.4G 自动剔除已连接的弱信号设备:
         sed -i 's/{ "rt_KickStaRssiLow", "0" }/{ "rt_KickStaRssiLow", "-90" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
@@ -89,12 +89,12 @@ jobs:
         
         #如果上面配置本次编译为默认 AP 模式 ，则改为 AP 模式
         if [ "$TNAME" = "GL-FE-AP" ] ; then
-        #改为 AP 模式
-        sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-        #关 DHCP
-        sed -i 's/{ "dhcp_enable_x", "1" }/{ "dhcp_enable_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-        # WAN 口改为桥接模式
-        sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          #改为 AP 模式
+          sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          #关 DHCP
+          sed -i 's/{ "dhcp_enable_x", "1" }/{ "dhcp_enable_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          # WAN 口改为桥接模式
+          sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
         cat /opt/rt-n56u/trunk/user/shared/defaults.c
         
