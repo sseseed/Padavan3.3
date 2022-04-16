@@ -69,10 +69,17 @@ jobs:
         #改 DHCP 分配起始、终结地址
         sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
         sed -i 's/192.168.2.244/192.168.1.200/' /opt/rt-n56u/trunk/user/shared/defaults.h
-        #改 NTP 服务器地址
-        sed -i 's/2001:470:0:50::2/time2.cloud.tencent.com/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        # DHCP 租期改为 1 小时
+        sed -i 's/{ "dhcp_lease", "86400" }/{ "dhcp_lease", "3600" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        # 改 DHCP 分配的 DNS 服务器
+        sed -i 's/{ "dhcp_dns1_x", "" }/{ "dhcp_dns1_x", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/{ "dhcp_dns2_x", "" }/{ "dhcp_dns2_x", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
         
-        #关 IGMP、设置 DNS 服务器
+        #改 NTP 服务器地址和 NTP 时间更新周期
+        sed -i 's/2001:470:0:50::2/time2.cloud.tencent.com/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/{ "ntp_period", "24" }/{ "ntp_period", "72" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #设置 LAN 口参数关 IGMP、设置 DNS 服务器
         sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
@@ -91,8 +98,11 @@ jobs:
         if [ "$TNAME" = "GL-FE-AP" ] ; then
           #改为 AP 模式
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          #关 DHCP
+          #关 DHCP IP 分配
           sed -i 's/{ "dhcp_enable_x", "1" }/{ "dhcp_enable_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          #关 LAN 口网管地址的 DHCP 获取地址模式
+          sed -i 's/{ "lan_proto_x", "1" }/{ "lan_proto_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          
           # WAN 口改为桥接模式
           sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
