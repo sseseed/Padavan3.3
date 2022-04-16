@@ -70,10 +70,10 @@ jobs:
         sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
         sed -i 's/192.168.2.244/192.168.1.200/' /opt/rt-n56u/trunk/user/shared/defaults.h
         # DHCP 租期改为 1 小时
-        sed -i 's/{ "dhcp_lease", "86400" }/{ "dhcp_lease", "3600" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/{ "dhcp_lease", "86400" }/{ "dhcp_lease", "3600" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         # 改 DHCP 分配的 DNS 服务器
-        sed -i 's/{ "dhcp_dns1_x", "" }/{ "dhcp_dns1_x", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
-        sed -i 's/{ "dhcp_dns2_x", "" }/{ "dhcp_dns2_x", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/{ "dhcp_dns1_x", "" }/{ "dhcp_dns1_x", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "dhcp_dns2_x", "" }/{ "dhcp_dns2_x", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #改 NTP 服务器地址和 NTP 时间更新周期
         sed -i 's/2001:470:0:50::2/time2.cloud.tencent.com/' /opt/rt-n56u/trunk/user/shared/defaults.h
