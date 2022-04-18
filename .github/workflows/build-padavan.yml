@@ -40,8 +40,9 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
-        git clone --depth=1 https://github.com/sseseed/My-Padavan.git /opt/My-Padavan
+        #git clone --depth=1 https://github.com/sseseed/My-Padavan.git /opt/My-Padavan
         cp -r /opt/My-Padavan/* /opt/rt-n56u
+        cp -r * /opt/rt-n56u
         
         cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/GE-AP
         
