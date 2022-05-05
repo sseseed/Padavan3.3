@@ -101,8 +101,7 @@ jobs:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #改为 AP 模式
-        if [ "$TNAME" = "GL-FE-AP" || "$TNAME" = "GL-FE-AP" ] ; then
-          echo "$TNAME"
+        if [ "$TNAME" = "GL-FE-AP" -a "$TNAME" = "GL-FE-AP" ] ; then
           #改为 AP 模式
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           #关 DHCP IP 分配
@@ -113,7 +112,11 @@ jobs:
           # WAN 口改为桥接模式
           sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c
+        echo aaaaaaaaaa
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep sw_mode
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep dhcp_enable_x
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | lan_proto_x
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | wan_route_x
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
         sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
