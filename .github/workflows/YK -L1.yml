@@ -7,7 +7,8 @@
 # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
 # YK-L1：MT7620 32M+128M 2.4G:300M
 # GL-FE-AP：MT7628 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
-name: YK-L1
+# WR211：MT7628 8M+128M  2.4G:300M + 5.8G 866M 中国电信 瑞斯康达 WR211 AP 面板
+name: WR211
 on: 
   release:
     types: [published]
@@ -51,7 +52,8 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: "YK-L1"
+        #此处为需要编译的型号
+        TNAME: "WR211"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
@@ -98,8 +100,9 @@ jobs:
         #修改 5.8G 自动限制弱信号设备接入:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
-        #如果上面配置本次编译为默认 AP 模式 ，则改为 AP 模式
-        if [ "$TNAME" = "GL-FE-AP" ] ; then
+        #改为 AP 模式
+        if [ "$TNAME" = "GL-FE-AP" || "$TNAME" = "GL-FE-AP" ] ; then
+          echo "$TNAME"
           #改为 AP 模式
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           #关 DHCP IP 分配
