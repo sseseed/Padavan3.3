@@ -101,7 +101,8 @@ jobs:
         sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #改为 AP 模式
-        if [ "$TNAME" = "GL-FE-AP" -a "$TNAME" = "GL-FE-AP" ] ; then
+        if [ "$TNAME" = "GL-FE-AP" -o "$TNAME" = "GL-FE-AP" ] ; then
+          
           #改为 AP 模式
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           #关 DHCP IP 分配
