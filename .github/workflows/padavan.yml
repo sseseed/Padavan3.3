@@ -108,15 +108,14 @@ jobs:
           sed -i 's/{ "dhcp_enable_x", "1" }/{ "dhcp_enable_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           #关 LAN 口网管地址的 DHCP 获取地址模式
           sed -i 's/{ "lan_proto_x", "1" }/{ "lan_proto_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
-          
           # WAN 口改为桥接模式
           sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
         echo aaaaaaaaaa
         cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep sw_mode
         cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep dhcp_enable_x
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | lan_proto_x
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | wan_route_x
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep lan_proto_x
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep wan_route_x
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
         sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
