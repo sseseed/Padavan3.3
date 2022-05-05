@@ -67,7 +67,7 @@ jobs:
         sed -i 's/mips_cpu_feq = 575 \* 1000 \* 1000/mips_cpu_feq = 540 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #MT7628频率 540 MHZ
         sed -i 's/mips_cpu_feq = 580 \* 1000 \* 1000/mips_cpu_feq = 540 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #MT7628频率 540 MHZ
         sed -i 's/surfboard_sysclk = mips_cpu_feq\/3/surfboard_sysclk = 150000000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #内存频率 150 MHZ
-        
+        echo "/opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c"
         cat /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
         
         #改 LAN IP 信息
@@ -102,7 +102,7 @@ jobs:
         
         #改为 AP 模式
         if [ "$TNAME" = "GL-FE-AP" -o "$TNAME" = "WR211" ] ; then
-          
+          echo aaaaaaaaaa AP-Mode  
           #改为 AP 模式
           sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
           #关 DHCP IP 分配
@@ -112,11 +112,6 @@ jobs:
           # WAN 口改为桥接模式
           sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         fi
-        echo aaaaaaaaaa
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep sw_mode
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep dhcp_enable_x
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep lan_proto_x
-        cat /opt/rt-n56u/trunk/user/shared/defaults.c | grep wan_route_x
         
         #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
         sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
@@ -126,6 +121,8 @@ jobs:
         sed -i 's/{ "di_addr4", "8.8.4.4" }/{ "di_addr4", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "di_addr5", "208.67.220.220" }/{ "di_addr5", "119.29.29.29" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
         sed -i 's/{ "di_port2", "80" }/{ "di_port2", "53" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        echo "/opt/rt-n56u/trunk/user/shared/defaults.c"
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c
         
         #改恢复出厂设置后跳转的新地址
         sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
