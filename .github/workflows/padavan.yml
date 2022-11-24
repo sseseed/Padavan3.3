@@ -8,7 +8,7 @@
 # YK-L1：MT7620 32M+128M 2.4G:300M
 # GL-FE-AP：MT7628 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
 # WR211：MT7628 8M+128M  2.4G:300M + 5.8G 866M 中国电信 瑞斯康达 WR211 AP 面板
-name: WR211
+name: FE-AP
 on: 
   release:
     types: [published]
@@ -53,7 +53,7 @@ jobs:
     - name: Build Firmware
       env:
         #此处为需要编译的型号
-        TNAME: "WR211"
+        TNAME: "FE-AP"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
