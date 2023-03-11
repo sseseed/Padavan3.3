@@ -41,13 +41,11 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
-        #git clone --depth=1 https://github.com/sseseed/My-Padavan.git /opt/My-Padavan
-        #cp -r /opt/My-Padavan/* /opt/rt-n56u
+        #git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u    #Linux 内核 3.4
+        git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u  ##Linux 内核 4.4
         cp -r * /opt/rt-n56u
-        
         cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/GE-AP
-        
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/WIA3300-10
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
