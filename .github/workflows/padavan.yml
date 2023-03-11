@@ -50,6 +50,8 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
+        ls /opt/rt-n56u/trunk/
+        ls /opt/rt-n56u/trunk/linux-4.4.x
     - name: Build Firmware
       env:
         #此处为需要编译的型号
