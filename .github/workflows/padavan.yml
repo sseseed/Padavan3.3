@@ -9,7 +9,7 @@
 # GL-FE-AP：MT7628+MT7612 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
 # WR211：MT7628+MT7612 8M+128M  2.4G:300M + 5.8G 866M 中国电信 瑞斯康达 WR211 AP 面板
 # WIA3300-10：MT7621+MT7615 32M+256M  2.4G:300M + 5.8G 866M 成都西加云杉 吊顶 AP
-name: WIA3300-10
+name: GL-FE-AP
 on: 
   release:
     types: [published]
@@ -51,7 +51,7 @@ jobs:
     - name: Build Firmware
       env:
         #此处为需要编译的型号
-        TNAME: "WIA3300-10"
+        TNAME: "GL-FE-AP"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
