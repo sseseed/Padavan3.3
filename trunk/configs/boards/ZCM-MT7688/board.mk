@@ -6,4 +6,4 @@ ZCM-MT7688     # ZCM-MT7688                  # MT7628  #
 ##################################################################
 
 CFLAGS += -DBOARD_ZCM-MT7688
-BOARD_NUM_USB_PORTS=1
+BOARD_NUM_USB_PORTS=0
