@@ -6,10 +6,12 @@
 # FE-AP：XB764   MT7628+MT7612 8M+64M  2.4G:300M + 5.8G:866M 阿里爸爸 面板 AP
 # MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
 # YK-L1：MT7620 32M+128M 2.4G:300M
-# GL-FE-AP：MT7628+MT7612 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
+# GL-FE-AP：MT7628 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
 # WR211：MT7628+MT7612 8M+128M  2.4G:300M + 5.8G 866M 中国电信 瑞斯康达 WR211 AP 面板
 # WIA3300-10：MT7621+MT7615 32M+256M  2.4G:300M + 5.8G 866M 成都西加云杉 吊顶 AP
-name: GL-FE-AP
+# ZCM-MT7688：MT7688 8M+64M 2.4G:300M 招财喵
+
+name: ZCM-MT7688
 on: 
   release:
     types: [published]
@@ -51,7 +53,7 @@ jobs:
     - name: Build Firmware
       env:
         #此处为需要编译的型号
-        TNAME: "GL-FE-AP"
+        TNAME: "ZCM-MT7688"
       run: |
         cd /opt/rt-n56u/trunk
         #替换掉文件中的 ^M
