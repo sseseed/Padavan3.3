@@ -1,0 +1,156 @@
+# 原项目地址 https://github.com/chongshengB/Padavan-build
+
+
+# 编译名称 实际型号 具体硬件配置
+# GE-AP：XB1200G MT7621+MT7615 8M+128M 2.4G:300M + 5.8G:866M 阿里爸爸 面板 AP
+# FE-AP：XB764   MT7628+MT7612 8M+64M  2.4G:300M + 5.8G:866M 阿里爸爸 面板 AP
+# MSG1500：MT7621+MT7603+MT7612 16M+64M 2.4G:300M + 5.8G:866M
+# YK-L1：MT7620 32M+128M 2.4G:300M
+# GL-FE-AP：MT7628 8M+64M 2.4G:300M 格力 WIFI 模块，默认编译为 AP 模式
+# WR211：MT7628+MT7612 8M+128M  2.4G:300M + 5.8G 866M 中国电信 瑞斯康达 WR211 AP 面板
+# WIA3300-10：MT7621+MT7615 32M+256M  2.4G:300M + 5.8G 866M 成都西加云杉 吊顶 AP
+# ZCM-MT7688：MT7688 8M+64M 2.4G:300M 招财喵
+
+name: MSG1500
+on: 
+  release:
+    types: [published]
+  push:
+    tags:
+    - 'v*'
+  #  branches: 
+  #    - master
+#  schedule:
+#    - cron: 0 8 * * 5
+  watch:
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+    - name: Clone source code
+      run: |
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u    #Linux 内核 3.4
+        cp -r * /opt/rt-n56u
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/GE-AP
+        cp -r /opt/rt-n56u/trunk/configs/boards/K2P/SingleSKU* /opt/rt-n56u/trunk/configs/boards/WIA3300-10
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir -p /opt/images/
+    - name: Build Firmware
+      env:
+        #此处为需要编译的型号
+        TNAME: "MSG1500"
+      run: |
+        cd /opt/rt-n56u/trunk
+        #替换掉文件中的 ^M
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.h
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/$TNAME/board.mk
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/$TNAME/kernel-3.4.x.config
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/$TNAME/kernel-3.4.x-5.0.config
+        sed -i 's/\r//g' /opt/rt-n56u/trunk/configs/boards/$TNAME/l1profile.dat
+        
+        #改 MT7628 频率
+        sed -i 's/mips_cpu_feq = 575 \* 1000 \* 1000/mips_cpu_feq = 540 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #MT7628频率 540 MHZ
+        sed -i 's/mips_cpu_feq = 580 \* 1000 \* 1000/mips_cpu_feq = 540 \* 1000 \* 1000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #MT7628频率 540 MHZ
+        sed -i 's/surfboard_sysclk = mips_cpu_feq\/3/surfboard_sysclk = 150000000/' /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c #内存频率 150 MHZ
+        echo "/opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c"
+        cat /opt/rt-n56u/trunk/linux-3.4.x/arch/mips/rt2880/init.c
+        
+        #改 LAN IP 信息
+        sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        #改 DHCP 分配起始、终结地址
+        sed -i 's/192.168.2.100/192.168.1.100/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/192.168.2.244/192.168.1.200/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        # DHCP 租期改为 1 小时
+        sed -i 's/{ "dhcp_lease", "86400" }/{ "dhcp_lease", "3600" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        # 改 DHCP 分配的 DNS 服务器
+        sed -i 's/{ "dhcp_dns1_x", "" }/{ "dhcp_dns1_x", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "dhcp_dns2_x", "" }/{ "dhcp_dns2_x", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #改 NTP 服务器地址和 NTP 时间更新周期
+        sed -i 's/2001:470:0:50::2/time2.cloud.tencent.com/' /opt/rt-n56u/trunk/user/shared/defaults.h
+        sed -i 's/{ "ntp_period", "24" }/{ "ntp_period", "72" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #设置 LAN 口参数关 IGMP、设置 DNS 服务器
+        sed -i 's/{ "ether_igmp", "1" }/{ "ether_igmp", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "lan_dns_x", "1" }/{ "lan_dns_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "lan_dns1", "" }/{ "lan_dns1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "lan_dns2", "" }/{ "lan_dns2", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #修改 2.4G 自动剔除已连接的弱信号设备:
+        sed -i 's/{ "rt_KickStaRssiLow", "0" }/{ "rt_KickStaRssiLow", "-90" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        #修改 2.4G 自动限制弱信号设备接入:
+        sed -i 's/{ "rt_AssocReqRssiThres", "0" }/{ "rt_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        #修改 5.8G 自动剔除已连接的弱信号设备:
+        sed -i 's/{ "wl_KickStaRssiLow", "0" }/{ "wl_KickStaRssiLow", "-90" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        #修改 5.8G 自动限制弱信号设备接入:
+        sed -i 's/{ "wl_AssocReqRssiThres", "0" }/{ "wl_AssocReqRssiThres", "-85" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #改为 AP 模式
+        if [ "$TNAME" = "GL-FE-AP" -o "$TNAME" = "WR211" ] ; then
+          echo aaaaaaaaaa AP-Mode  
+          #改为 AP 模式
+          sed -i 's/{ "sw_mode", "1" }/{ "sw_mode", "3" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          #关 DHCP IP 分配
+          sed -i 's/{ "dhcp_enable_x", "1" }/{ "dhcp_enable_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          #关 LAN 口网管地址的 DHCP 获取地址模式
+          sed -i 's/{ "lan_proto_x", "1" }/{ "lan_proto_x", "0" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+          # WAN 口改为桥接模式
+          sed -i 's/{ "wan_route_x", "IP_Routed" }/{ "wan_route_x", "IP_Bridged" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        fi
+        
+        #发送网络监测器监测主机列表。网络监测器用于监控路由器的联网状态。
+        sed -i 's/{ "di_addr0", "114.114.114.114" }/{ "di_addr0", "223.5.5.5" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr1", "208.67.222.222" }/{ "di_addr1", "223.6.6.6" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr2", "14.17.42.40" }/{ "di_addr2", "114.114.114.114" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr3", "8.8.8.8" }/{ "di_addr3", "114.114.115.115" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr4", "8.8.4.4" }/{ "di_addr4", "180.76.76.76" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_addr5", "208.67.220.220" }/{ "di_addr5", "119.29.29.29" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        sed -i 's/{ "di_port2", "80" }/{ "di_port2", "53" }/' /opt/rt-n56u/trunk/user/shared/defaults.c
+        echo "/opt/rt-n56u/trunk/user/shared/defaults.c"
+        cat /opt/rt-n56u/trunk/user/shared/defaults.c
+        
+        #改恢复出厂设置后跳转的新地址
+        sed -i "s#192.168.2.1#192.168.1.1#" /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Restarting.asp
+        
+        #显示 VPN 服务器和客户端菜单
+        sed -i 's/menuL1_title = new Array("", "<#menu1#>", "", "", ""/menuL1_title = new Array("", "<#menu1#>", "", "<#menu2#>", "<#menu6#>"/' /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/state.js
+        sed -i 's/menuL1_link = new Array("", "index.asp", "", "", ""/menuL1_link = new Array("", "index.asp", "", "vpnsrv.asp", "vpncli.asp"/' /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/state.js
+        
+        #修改语言包的默认 IP 说明
+        sed -i 's/192.168.2.1/192.168.1.1/' /opt/rt-n56u/trunk/user/www/dict/CN.dict
+
+        #改版本后缀
+        echo "FIRMWARE_ROOTFS_VER=3.9" > /opt/rt-n56u/trunk/versions.inc
+        echo "FIRMWARE_BUILDS_VER=099-"$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
+        echo "FIRMWARE_BUILDS_REV="$(date +%Y%m%d) >> /opt/rt-n56u/trunk/versions.inc
+        
+        if [ ! -f configs/templates/$TNAME.config ] ; then
+        echo "configs/templates/$TNAME.config not found "
+        exit 1
+        fi
+        cp -f configs/templates/$TNAME.config .config
+        
+        sudo ./clear_tree
+        sudo ./build_firmware_modify $TNAME 0
+        sudo mv -f images/*.trx /opt/images/
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
